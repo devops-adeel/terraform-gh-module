@@ -8,25 +8,16 @@ resource "github_repository" "default" {
 
   template {
     owner      = "devops-adeel"
-    repository = "template-customer-repo"
+    repository = "template-customer-repo"   #NOTE: As part of the template, a branch called 'main' is created.
   }
 }
 
-resource "github_branch" "default" {
-  repository = github_repository.default.name
-  branch     = "main"
-}
-
-resource "github_branch_default" "default" {
-  repository = github_repository.default.name
-  branch     = github_branch.default.branch
-}
-
-resource "github_branch_protection" "default" {
-  repository_id  = github_repository.default.node_id
-  pattern        = "main"
-  enforce_admins = true
-}
+#TODO: This needs to be enabled when repos are owned by Hashicorp
+/* resource "github_branch_protection" "default" { */
+/*   repository_id  = github_repository.default.node_id */
+/*   pattern        = "main" */
+/*   enforce_admins = true */
+/* } */
 
 resource "github_actions_secret" "default" {
   repository      = github_repository.default.name
