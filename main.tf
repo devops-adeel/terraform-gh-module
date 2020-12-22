@@ -1,10 +1,13 @@
+locals {
+  branch = "main"
+}
+
 resource "github_repository" "default" {
   name                   = var.application_name
   description            = "Repository to prep services for ${var.application_name}"
   visibility             = "private"
   has_issues             = true
   delete_branch_on_merge = true
-  gitignore_template     = "Terraform"
 
   template {
     owner      = "devops-adeel"
@@ -12,23 +15,28 @@ resource "github_repository" "default" {
   }
 }
 
+resource "github_branch_default" "default" {
+  repository = github_repository.default.name
+  branch = local.branch
+}
+
 #TODO: This needs to be enabled when repos are owned by Hashicorp
 /* resource "github_branch_protection" "default" { */
 /*   repository_id  = github_repository.default.node_id */
-/*   pattern        = "main" */
+/*   pattern        = local.branch */
 /*   enforce_admins = true */
 /* } */
 
 resource "github_actions_secret" "default" {
   repository      = github_repository.default.name
-  secret_name     = "tfc_token"
+  secret_name     = "TFE_TOKEN"
   plaintext_value = var.tfc_token
 }
 
 resource "github_repository_file" "default" {
   repository          = github_repository.default.name
-  branch              = "main"
-  file                = "provider.tf"
+  branch              = local.branch
+  file                = "terraform/provider.tf"
   commit_message      = "Rendered provider configuration"
   commit_author       = "tfc_run"
   commit_email        = "team-is@hashicorp.com"
