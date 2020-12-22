@@ -8,7 +8,7 @@ resource "github_repository" "default" {
 
   template {
     owner      = "devops-adeel"
-    repository = "template-customer-repo"   #NOTE: As part of the template, a branch called 'main' is created.
+    repository = "template-customer-repo" #NOTE: As part of the template, a branch called 'main' is created.
   }
 }
 
@@ -23,4 +23,15 @@ resource "github_actions_secret" "default" {
   repository      = github_repository.default.name
   secret_name     = "tfc_token"
   plaintext_value = var.tfc_token
+}
+
+resource "github_repository_file" "default" {
+  repository          = github_repository.default.name
+  branch              = "main"
+  file                = "provider.tf"
+  commit_message      = "Rendered provider configuration"
+  commit_author       = "tfc_run"
+  commit_email        = "team-is@hashicorp.com"
+  content             = templatefile("${path.module}/provider.tpl", { tfc_workspace = var.tfc_workspace })
+  /* overwrite_on_create = true */
 }
