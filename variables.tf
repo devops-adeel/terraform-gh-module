@@ -13,3 +13,9 @@ variable "tfc_workspace" {
   type        = string
   default     = "changeme"
 }
+
+variable "template_type" {
+  description = "Template type determines which GH template to use, currently supported: [`module`, `customer`]"
+  type        = string
+  default     = "module"
+}

@@ -1,5 +1,9 @@
 locals {
   branch = "main"
+  template_type = {
+    customer = "terraform/provider.tf"
+    module   = "integration_tests/fixtures/provider.tf"
+  }
 }
 
 resource "github_repository" "default" {
@@ -11,13 +15,13 @@ resource "github_repository" "default" {
 
   template {
     owner      = "devops-adeel"
-    repository = "template-customer-repo" #NOTE: As part of the template, a branch called 'main' is created.
+    repository = "template-${var.template_type}-repo" #NOTE: As part of the template, a branch called 'main' is created.
   }
 }
 
 resource "github_branch_default" "default" {
   repository = github_repository.default.name
-  branch = local.branch
+  branch     = local.branch
 }
 
 #TODO: This needs to be enabled when repos are owned by Hashicorp
@@ -34,12 +38,12 @@ resource "github_actions_secret" "default" {
 }
 
 resource "github_repository_file" "default" {
-  repository          = github_repository.default.name
-  branch              = local.branch
-  file                = "terraform/provider.tf"
-  commit_message      = "Rendered provider configuration"
-  commit_author       = "tfc_run"
-  commit_email        = "team-is@hashicorp.com"
-  content             = templatefile("${path.module}/provider.tpl", { tfc_workspace = var.tfc_workspace })
+  repository     = github_repository.default.name
+  branch         = local.branch
+  file           = lookup(local.template_type, var.template_type, module)
+  commit_message = "Rendered provider configuration"
+  commit_author  = "tfc_run"
+  commit_email   = "team-is@hashicorp.com"
+  content        = templatefile("${path.module}/provider.tpl", { tfc_workspace = var.tfc_workspace })
   /* overwrite_on_create = true */
 }
