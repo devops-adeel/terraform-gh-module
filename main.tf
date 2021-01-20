@@ -40,7 +40,7 @@ resource "github_actions_secret" "default" {
 resource "github_repository_file" "default" {
   repository     = github_repository.default.name
   branch         = local.branch
-  file           = lookup(local.template_type, var.template_type, module)
+  file           = lookup(local.template_type, var.template_type)
   commit_message = "Rendered provider configuration"
   commit_author  = "tfc_run"
   commit_email   = "team-is@hashicorp.com"
