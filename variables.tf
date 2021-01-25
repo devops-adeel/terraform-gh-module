@@ -19,3 +19,8 @@ variable "template_type" {
   type        = string
   default     = "module"
 }
+
+variable "vault_namespace" {
+  description = "Vault namespace to add as TFC variable"
+  type = string
+}

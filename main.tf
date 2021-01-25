@@ -44,6 +44,6 @@ resource "github_repository_file" "default" {
   commit_message = "Rendered provider configuration"
   commit_author  = "tfc_run"
   commit_email   = "team-is@hashicorp.com"
-  content        = templatefile("${path.module}/provider.tpl", { tfc_workspace = var.tfc_workspace })
-  /* overwrite_on_create = true */
+  content        = templatefile("${path.module}/provider.tpl", { tfc_workspace = var.tfc_workspace, vault_namespace = var.vault_namespace })
+  overwrite_on_create = true
 }
