@@ -9,7 +9,7 @@ locals {
 resource "github_repository" "default" {
   name                   = var.application_name
   description            = "Repository to prep services for ${var.application_name}"
-  visibility             = "private"
+  visibility             = var.repo_visibility
   has_issues             = true
   delete_branch_on_merge = true
 

@@ -13,7 +13,9 @@ No requirements.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | `application_name` | Name of the application/customer | `string` | n/a | yes |
+| `repo_visibility` | Whether to allow the repo to be public, defaults to private. | `string` | `"private"` | no |
 | `tfc_token` | The TFC Token required to run tf plan/apply from the pipeline. | `string` | n/a | yes |
+| `tfc_workspace` | TFC workspace dedicated for this repo | `string` | `"changeme"` | no |
 | `template_type` | Template type determines which GH template to use, currently supported: [`module`, `customer`] | `string` | n/a | yes |
 | `vault_namespace` | Vault namespace to add as TFC variable | `string` | n/a | yes |
 

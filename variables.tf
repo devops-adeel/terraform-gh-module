@@ -24,3 +24,9 @@ variable "vault_namespace" {
   description = "Vault namespace to add as TFC variable"
   type = string
 }
+
+variable "repo_visibility" {
+  description = "Whether to allow the repo to be public, defaults to private."
+  type = string
+  default = "private"
+}
