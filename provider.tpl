@@ -13,12 +13,12 @@ terraform {
   }
 }
 
-variable approle_id {}
-variable approle_secret {}
+variable "approle_id" {}
+variable "approle_secret" {}
 
 provider "vault" {
   auth_login {
-    namespace = ${vault_namespace}
+    namespace = "${vault_namespace}"
     path = "auth/approle/login"
 
     parameters = {
