@@ -19,7 +19,7 @@ variable "approle_secret" {}
 provider "vault" {
   auth_login {
     namespace = "${vault_namespace}"
-    path = "auth/approle/login"
+    path      = "auth/approle/login"
 
     parameters = {
       role_id   = var.approle_id
@@ -28,3 +28,8 @@ provider "vault" {
   }
 }
 
+locals {
+  application_name = "${vault_namespace}"
+  env              = "dev"
+  service          = "web"
+}

@@ -15,8 +15,8 @@ resource "github_repository" "default" {
 
   template {
     owner      = "devops-adeel"
-    repository = "template-${var.template_type}-repo" #NOTE: As part of the template, a branch called 'main' is created.
-  }
+    repository = "template-${var.template_type}-repo"
+  } #NOTE: As part of the template, a branch called 'main' is created.
 }
 
 resource "github_branch_default" "default" {
