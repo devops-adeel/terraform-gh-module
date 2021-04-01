@@ -8,7 +8,7 @@ terraform {
     organization = "hc-implementation-services"
 
     workspaces {
-      name = "${tfc_workspace}"
+      name = "${application}"
     }
   }
 }
@@ -18,8 +18,8 @@ variable "approle_secret" {}
 
 provider "vault" {
   auth_login {
-    namespace = "${vault_namespace}"
-    path = "auth/approle/login"
+    namespace = "admin/${application}"
+    path      = "auth/approle/login"
 
     parameters = {
       role_id   = var.approle_id
@@ -28,3 +28,8 @@ provider "vault" {
   }
 }
 
+locals {
+  application_name = "${application}"
+  env              = "dev"
+  service          = "web"
+}
