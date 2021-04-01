@@ -1,3 +1,18 @@
+/**
+ * Usage:
+ *
+ * ```hcl
+ *
+ * module "github_repo" {
+ *   source           = "git::https://github.com/devops-adeel/terraform-gh-module.git?ref=v0.5.0"
+ *   application_name = "foo"
+ *   tfc_token        = vault_terraform_cloud_secret_creds.default.token
+ *   template_type    = "module"
+ *   repo_visibility  = "public"
+ * }
+ * ```
+ */
+
 locals {
   branch        = "main"
   application   = var.application_name
