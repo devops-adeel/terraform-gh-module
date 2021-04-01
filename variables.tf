@@ -6,12 +6,7 @@ variable "application_name" {
 variable "tfc_token" {
   description = "The TFC Token required to run tf plan/apply from the pipeline."
   type        = string
-}
-
-variable "tfc_workspace" {
-  description = "TFC workspace dedicated for this repo"
-  type        = string
-  default     = "changeme"
+  sensitive   = true
 }
 
 variable "template_type" {
@@ -20,13 +15,8 @@ variable "template_type" {
   default     = "module"
 }
 
-variable "vault_namespace" {
-  description = "Vault namespace to add as TFC variable"
-  type = string
-}
-
 variable "repo_visibility" {
   description = "Whether to allow the repo to be public, defaults to private."
-  type = string
-  default = "private"
+  type        = string
+  default     = "private"
 }
