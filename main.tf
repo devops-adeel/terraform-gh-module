@@ -58,4 +58,10 @@ resource "github_repository_file" "default" {
   commit_email        = "team-is@hashicorp.com"
   content             = templatefile("${path.module}/provider.tpl", { application = local.application })
   overwrite_on_create = true
+
+  lifecycle {
+    ignore_changes = [
+      content,
+    ]
+  }
 }
