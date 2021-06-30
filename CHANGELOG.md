@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+### [0.5.2](https://www.github.com/devops-adeel/terraform-gh-module/compare/v0.5.1...v0.5.2) (2021-06-30)
+
+
+### Bug Fixes
+
+* added ignore_changes ([fad6982](https://www.github.com/devops-adeel/terraform-gh-module/commit/fad6982cb4222e9bab9d217557576e6c3e8ef072))
+
 ### [0.5.1](https://www.github.com/devops-adeel/terraform-gh-module/compare/v0.5.0...v0.5.1) (2021-04-01)
 
 
